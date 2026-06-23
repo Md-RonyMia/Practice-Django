@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import  User
 from constants import GENDER_TYPE,ACCOUNT_TYPE
 
 # Create your models here.
