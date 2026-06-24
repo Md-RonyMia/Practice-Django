@@ -18,8 +18,9 @@ class UserRegistrationForm(UserCreationForm):
         fields=['username','password1','password2','first_name','last_name','email','birth_date','account_type','gender','postal_code','street_address','city','country']
 
     def save(self,commit=True):
-        user=super.save(commit=False)
+        user=super().save(commit=False)
         if commit==True:
+            user.save()
             account_type=self.cleaned_data['account_type']
             gender=self.cleaned_data['gender']
             postal_code=self.cleaned_data['postal_code']
@@ -29,7 +30,6 @@ class UserRegistrationForm(UserCreationForm):
             birth_date=self.cleaned_data['birth_date']
             UserAddress.objects.create(
                 user=user,
-                account_type=account_type,
                 postal_code=postal_code,
                 city=city,
                 country=country,
@@ -42,7 +42,7 @@ class UserRegistrationForm(UserCreationForm):
                 birth_date=birth_date,
                 account_no=10000+user.id
             )
-        return
+        return user
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
